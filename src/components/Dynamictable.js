@@ -78,7 +78,7 @@ class Dynamictable extends Component {
         <hr/>
         {
           this.props.val.map(function(values,index){
-            return <div className="menu"> { K[index].map(function(vales){
+            return <div className="menu"> { K[index + 1].map(function(vales){
               return <span> {vales} </span>
             }) } </div>
           })
