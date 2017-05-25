@@ -8920,3 +8920,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     margin-bottom: 5em;
   }
 }
+
+.menu {text-align:justify;}
+.menu > span {}
+.menu:after { content:' '; display:inline-block; width: 100%;}

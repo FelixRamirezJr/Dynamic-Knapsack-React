@@ -8,11 +8,10 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      maxweight: 10,
-      wt: [10,20,30,40],
-      val: [100,115,137,180],
+      maxweight: 7,
+      wt: [1,3,4,5],
+      val: [1,4,5,7],
       n: 4,
-      maxweight: "",
       values: "",
       weights: "",
       errors: [],
@@ -65,7 +64,8 @@ class App extends Component {
       // Continue
       console.log("VALUES CH");
       this.setState({ wt: [1,2,3,4] });
-      this.setState({val: [1,2,3,4]  })
+      this.setState({val: [1,2,3,4]  });
+      this.setState({maxweight: 10});
     }
   }
 

@@ -4,53 +4,85 @@ class Dynamictable extends Component {
   constructor(props){
     super(props);
     this.state = {name: "Felix",
-                  W: props.maxweight,
+                  maxweight: props.maxweight,
                   wt: props.wt,
                   val: props.val,
                   n: props.n,
                   i: 0,
                   w: 0,
-                  table: new Array([]) }
+                  table: [],
+                  K: null }
     // Set the number of rows for each of the following
 
   }
+
+  createArray(row,col){
+    var f = new Array;
+    for (var i=0;i<row;i++)
+    {
+     f[i] = new Array();
+     for (var j=0; j<col; j++)
+     {
+      f[i][j]=0;
+     }
+    }
+    return f;
+  }
+
+  max(a,b){
+    return (a > b) ? a : b;
+  }
+
   render() {
+    var table = [];
+    var maxWeightArray = [];
+
     var rows = [];
     var i = 0;
     for(i = 0; i < this.props.wt.length; i++ ){
       rows.push(<tr class="value" > {this.props.val[i]} ( {this.props.wt[i]} ) </tr>);
     }
-
     var toMaxWeight = [];
-    for(i = 0; i < this.props.W; i++ ){
-      toMaxWeight.push(<th> {i} </th>);
+    for(i = 0; i < this.props.maxweight; i++ ){
+      maxWeightArray.push(<span> {i+1} </span>);
     }
 
-    var iMax = 5;
-    var jMax = 5;
-    var f = new Array();
+    /* Knapsack problem */
+    var K = this.createArray( this.props.val.length + 1, this.props.maxweight + 1 );
 
-    for (var i=0;i<iMax;i++)
+    var i = 0;
+    var w = 0;
+
+    for( i = 0; i <= this.props.val.length; i++)
     {
-     f[i] = new Array();
-     for (var j=0;j<jMax;j++)
-     {
-      f[i][j]=0;
-     }
+      for( w = 0; w <= this.props.maxweight; w++ )
+      {
+        if( i == 0 || w == 0)
+        {
+          K[i][w] = 0;
+
+        } else if ( this.props.wt[i-1] <= w ){
+          K[i][w] = this.max( this.props.val[i-1] + K[i-1][w-this.props.wt[i - 1]], K[i-1][w]  );
+        } else {
+          K[i][w] = K[i-1][w];
+        }
+      }
     }
 
     return (
       <div>
-        <table>
-          <tr>
-            <th> Values Weight </th>
-            <th> Max Weight </th>
-            {toMaxWeight}
-            {this.props.wt}
-            {f}
-          </tr>
-          {rows}
-        </table>
+        <h4> Result Table</h4>
+        <div className="menu">
+          {maxWeightArray}
+        </div>
+        <hr/>
+        {
+          this.props.val.map(function(values,index){
+            return <div className="menu"> { K[index].map(function(vales){
+              return <span> {vales} </span>
+            }) } </div>
+          })
+        }
       </div>
     );
   }
