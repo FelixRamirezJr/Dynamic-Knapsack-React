@@ -17,28 +17,40 @@ class Dynamictable extends Component {
   render() {
     var rows = [];
     var i = 0;
-    for(i = 0; i < this.state.wt.length; i++ ){
-      rows.push(<tr class="value" > {this.state.val[i]} ( {this.state.wt[i]} ) </tr>);
+    for(i = 0; i < this.props.wt.length; i++ ){
+      rows.push(<tr class="value" > {this.props.val[i]} ( {this.props.wt[i]} ) </tr>);
     }
 
     var toMaxWeight = [];
-    for(i = 0; i < this.state.W; i++ ){
+    for(i = 0; i < this.props.W; i++ ){
       toMaxWeight.push(<th> {i} </th>);
+    }
+
+    var iMax = 5;
+    var jMax = 5;
+    var f = new Array();
+
+    for (var i=0;i<iMax;i++)
+    {
+     f[i] = new Array();
+     for (var j=0;j<jMax;j++)
+     {
+      f[i][j]=0;
+     }
     }
 
     return (
       <div>
-        <h1> Real time Dynamic Programming Solution </h1>
-
         <table>
           <tr>
             <th> Values Weight </th>
             <th> Max Weight </th>
             {toMaxWeight}
+            {this.props.wt}
+            {f}
           </tr>
           {rows}
         </table>
-
       </div>
     );
   }
