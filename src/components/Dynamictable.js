@@ -63,7 +63,7 @@ class Dynamictable extends Component {
 
     return (
       <div>
-        <h4> Result Table</h4>
+        <h4 className="center"> Result Table</h4>
         <div className="menu">
           {maxWeightArray}
         </div>

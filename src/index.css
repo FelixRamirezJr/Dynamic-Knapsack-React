@@ -8924,3 +8924,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .menu {text-align:justify;}
 .menu > span {}
 .menu:after { content:' '; display:inline-block; width: 100%;}
+
+body{
+  background-color: #e2e2e2;
+}
+label{
+  color: white;
+}
