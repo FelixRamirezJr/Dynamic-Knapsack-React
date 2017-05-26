@@ -8,14 +8,17 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      maxweight: 7,
-      wt: [1,3,4,5],
-      val: [1,4,5,7],
+      maxweight: 9,
+      wt: [1,3,4],
+      val: [1,4,5],
       n: 4,
       values: "",
       weights: "",
       errors: [],
-      solve_knap: false
+      solve_knap: false,
+      finalMaxWeight: 9,
+      finalWt: [1,3,4],
+      finalVal: [1,4,5]
     }
     this.maxWeightChange = this.maxWeightChange.bind(this);
     this.valueChange = this.valueChange.bind(this);
@@ -58,15 +61,40 @@ class App extends Component {
     if( this.state.weights.length == 0 ){
       errors.push("Weights can't be blank");
     }
+    if( !this.sameSizedArray( this.state.values.split(','),this.state.weights.split(',') ) ){
+      errors.push("Values and Weights must be the same size");
+    }
     this.setState({errors: errors});
     if( errors.length <= 0 )
     {
       // Continue
       console.log("VALUES CH");
-      this.setState({ wt: [1,2,3,4] });
-      this.setState({val: [1,2,3,4]  });
-      this.setState({maxweight: 10});
+      console.log( this.state.maxweight );
+      console.log(  this.stringArrToInt(this.state.values.split(",")) );
+      console.log( this.stringArrToInt(this.state.weights.split(",")) );
+
+      // Parse the input to add into the Dynamic Table Component
+      this.setState({ finalMaxWeight: parseInt(this.state.maxweight) });
+      this.setState({ finalVal: this.stringArrToInt(this.state.values.split(",") ) });
+      this.setState({ finalWt: this.stringArrToInt(this.state.weights.split(",")) });
     }
+  }
+
+  stringArrToInt(arr)
+  {
+    var newarr = new Array();
+    for(var i = 0; i < arr.length; i++)
+    {
+      newarr.push( parseInt(arr[i]) );
+    }
+    return newarr;
+  }
+
+  sameSizedArray( arr1, arr2 ){
+    if( arr1.length == arr2.length ){
+      return true;
+    }
+    return false;
   }
 
   render() {
@@ -103,9 +131,9 @@ class App extends Component {
           </div>
           <div className="col s9">
             <Dynamictable
-              maxweight={this.state.maxweight}
-              wt={this.state.wt}
-              val={this.state.val}
+              maxweight={this.state.finalMaxWeight}
+              wt={this.state.finalWt}
+              val={this.state.finalVal}
               n={this.state.n} />
           </div>
         </div>

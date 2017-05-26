@@ -3,15 +3,6 @@ import React, { Component } from 'react';
 class Dynamictable extends Component {
   constructor(props){
     super(props);
-    this.state = {name: "Felix",
-                  maxweight: props.maxweight,
-                  wt: props.wt,
-                  val: props.val,
-                  n: props.n,
-                  i: 0,
-                  w: 0,
-                  table: [],
-                  K: null }
     // Set the number of rows for each of the following
 
   }
@@ -36,8 +27,9 @@ class Dynamictable extends Component {
   render() {
     var table = [];
     var maxWeightArray = [];
-
     var rows = [];
+    var K = [];
+
     var i = 0;
     for(i = 0; i < this.props.wt.length; i++ ){
       rows.push(<tr class="value" > {this.props.val[i]} ( {this.props.wt[i]} ) </tr>);
@@ -77,7 +69,8 @@ class Dynamictable extends Component {
         </div>
         <hr/>
         {
-          this.props.val.map(function(values,index){
+          this.props.val.map(function(values,index)
+          {
             return <div className="menu"> { K[index + 1].map(function(vales){
               return <span> {vales} </span>
             }) } </div>
