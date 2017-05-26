@@ -8,9 +8,9 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      maxweight: 9,
-      wt: [1,3,4],
-      val: [1,4,5],
+      maxweight: "",
+      wt: "",
+      val: "",
       n: 4,
       values: "",
       weights: "",
@@ -111,19 +111,16 @@ class App extends Component {
             <label> Max Weight </label>
             <input onChange={this.maxWeightChange}
                    type="number"
-                   placeholder="10"
-                   value={this.state.maxweight} />
+                   placeholder={this.state.finalMaxWeight} />
 
             <label> All Values (Comma Seperated) </label>
             <input  onChange={this.valueChange}
-                    placeholder={this.state.val}
-                    defaultValue={this.state.val}
+                    placeholder={this.state.finalVal}
                     id="values" />
 
             <label> All Weights (Comma Seprated) </label>
             <input onChange={this.weightChange}
-                   placeholder={this.state.wt}
-                   defaultValue={this.state.wt}
+                   placeholder={this.state.finalWt}
                    id="weights" />
 
             <button className="btn" onClick={this.solveKnapsack}> Solve </button>
